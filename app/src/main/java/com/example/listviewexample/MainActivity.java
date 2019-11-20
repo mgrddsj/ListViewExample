@@ -1,12 +1,16 @@
 package com.example.listviewexample;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -15,18 +19,20 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity  {
     ListView listView;
+    GridView gridView;
+    List<Player> list;
+    boolean isListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listView=findViewById(R.id.listview);
-        List<Player> list= getPlayers();
-        //Todo reference listview
-        // Todo initialize custom adapter(MyAdapter) - using  method getPlayers, pay attention to constructor of MyAdapter
+        gridView = findViewById(R.id.gridView);
+        list= getPlayers();
         MyAdapter adapter=new MyAdapter(this,R.id.listview,list);
         listView.setAdapter(adapter);
-
+        isListView = true;
 
     }
 
@@ -52,5 +58,49 @@ public class MainActivity extends AppCompatActivity  {
         Intent intent = new Intent(this, ImageViewerActivity.class);
         intent.putExtra("image", imageResource);
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.switch_view, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.id.action_switch:
+                if (isListView)
+                {
+                    changeToGridView();
+                }
+                else
+                {
+
+                }
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void changeToGridView()
+    {
+        setContentView(R.layout.activity_main_gridview);
+        MyAdapter adapter = new MyAdapter(this, R.id.gridView, list);
+        gridView.setAdapter(adapter);
+        isListView = false;
+    }
+
+    public void changeToListView()
+    {
+        setContentView(R.layout.activity_main);
+        MyAdapter adapter = new MyAdapter(this,R.id.listview,list);
+        listView.setAdapter(adapter);
+        isListView = true;
     }
 }
