@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity  {
                 }
                 else
                 {
-
+                    changeToListView();
                 }
                 break;
             default:
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity  {
     public void changeToGridView()
     {
         setContentView(R.layout.activity_main_gridview);
-        MyAdapter adapter = new MyAdapter(this, R.id.gridView, list);
+        GridViewAdapter adapter = new GridViewAdapter(this, R.id.gridView, list);
         gridView.setAdapter(adapter);
         isListView = false;
     }
