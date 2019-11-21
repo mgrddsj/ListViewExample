@@ -1,36 +1,56 @@
 package com.example.listviewexample;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import java.util.List;
 
-public class MyAdapter extends ArrayAdapter<Player> {
+public class GridViewAdapter extends BaseAdapter
+{
     List<Player> listOfPlayers;
     Context context;
-    public MyAdapter(@NonNull Context context, int resource, @NonNull List<Player> objects) {
-        super(context, resource, objects);
+
+    public GridViewAdapter(@NonNull Context context, int resource, @NonNull List<Player> objects)
+    {
+        super();
         listOfPlayers = objects;
         this.context = context;
     }
 
-    @NonNull
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        View single_item_view = convertView;
+    @Override
+    public int getCount()
+    {
+        return listOfPlayers.size();
+    }
+
+    @Override
+    public Object getItem(int i)
+    {
+        return listOfPlayers.get(i);
+    }
+
+    @Override
+    public long getItemId(int i)
+    {
+        return 0;
+    }
+
+    @Override
+    public View getView(int i, View view, ViewGroup viewGroup)
+    {
+        View single_item_view = view;
         //Using this inflated view, we can get the access to the various UI widgets present in the row item XML file.
-        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (single_item_view == null)
             single_item_view = inflater.inflate(R.layout.single_item, null);
-        final Player player = listOfPlayers.get(position);
+        final Player player = listOfPlayers.get(i);
 
         TextView textView1 = single_item_view.findViewById(R.id.textView1);
         TextView textView2 = single_item_view.findViewById(R.id.textView2);
