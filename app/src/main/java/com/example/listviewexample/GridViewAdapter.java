@@ -49,7 +49,7 @@ public class GridViewAdapter extends BaseAdapter
         //Using this inflated view, we can get the access to the various UI widgets present in the row item XML file.
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (single_item_view == null)
-            single_item_view = inflater.inflate(R.layout.single_item, null);
+            single_item_view = inflater.inflate(R.layout.single_item_long, null);
         final Player player = listOfPlayers.get(i);
 
         TextView textView1 = single_item_view.findViewById(R.id.textView1);
