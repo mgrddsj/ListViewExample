@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity  {
     public void changeToListView()
     {
         setContentView(R.layout.activity_main);
-        MyAdapter adapter = new MyAdapter(this,R.id.listview,list);
+        MyAdapter adapter = new MyAdapter(this,R.id.listview, list);
         listView.setAdapter(adapter);
         isListView = true;
     }
