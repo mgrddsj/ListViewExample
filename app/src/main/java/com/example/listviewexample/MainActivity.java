@@ -73,14 +73,16 @@ public class MainActivity extends AppCompatActivity  {
         switch (item.getItemId())
         {
             case R.id.action_switch:
-                if (isListView)
-                {
-                    changeToGridView();
-                }
-                else
-                {
-                    changeToListView();
-                }
+//                if (isListView)
+//                {
+//                    changeToGridView();
+//                }
+//                else
+//                {
+//                    changeToListView();
+//                }
+                Intent intent = new Intent(this, GridViewActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;
@@ -90,7 +92,8 @@ public class MainActivity extends AppCompatActivity  {
 
     public void changeToGridView()
     {
-        setContentView(R.layout.activity_main_gridview);
+        View view = getLayoutInflater().inflate(R.layout.activity_main_gridview, null);
+        setContentView(view);
         GridViewAdapter adapter = new GridViewAdapter(this, R.id.gridView, list);
         gridView.setAdapter(adapter);
         isListView = false;
@@ -98,7 +101,8 @@ public class MainActivity extends AppCompatActivity  {
 
     public void changeToListView()
     {
-        setContentView(R.layout.activity_main);
+        View view = getLayoutInflater().inflate(R.layout.activity_main, null);
+        setContentView(view);
         MyAdapter adapter = new MyAdapter(this,R.id.listview, list);
         listView.setAdapter(adapter);
         isListView = true;

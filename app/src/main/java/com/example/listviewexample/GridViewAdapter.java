@@ -16,12 +16,14 @@ public class GridViewAdapter extends BaseAdapter
 {
     List<Player> listOfPlayers;
     Context context;
+    LayoutInflater inflater;
 
     public GridViewAdapter(@NonNull Context context, int resource, @NonNull List<Player> objects)
     {
         super();
         listOfPlayers = objects;
         this.context = context;
+        inflater = LayoutInflater.from(context);
     }
 
     @Override
@@ -47,7 +49,6 @@ public class GridViewAdapter extends BaseAdapter
     {
         View single_item_view = view;
         //Using this inflated view, we can get the access to the various UI widgets present in the row item XML file.
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (single_item_view == null)
             single_item_view = inflater.inflate(R.layout.single_item_long, null);
         final Player player = listOfPlayers.get(i);
@@ -64,18 +65,18 @@ public class GridViewAdapter extends BaseAdapter
         imageView.setImageResource(player.getImageResource());
 
         //Opens ImageViewerActivity onClick listener.
-        imageView.setClickable(true);
-        imageView.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                if (context instanceof MainActivity)
-                {
-                    ((MainActivity) context).startImageViewerActivity(player.getImageResource());
-                }
-            }
-        });
+//        imageView.setClickable(true);
+//        imageView.setOnClickListener(new View.OnClickListener()
+//        {
+//            @Override
+//            public void onClick(View view)
+//            {
+//                if (context instanceof MainActivity)
+//                {
+//                    ((MainActivity) context).startImageViewerActivity(player.getImageResource());
+//                }
+//            }
+//        });
 
         return  single_item_view;
     }
